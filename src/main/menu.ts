@@ -1,9 +1,9 @@
 import {
-  app,
-  Menu,
-  shell,
   BrowserWindow,
+  Menu,
   MenuItemConstructorOptions,
+  app,
+  shell,
 } from 'electron';
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
@@ -53,6 +53,8 @@ export default class MenuBuilder {
   }
 
   buildDarwinTemplate(): MenuItemConstructorOptions[] {
+    return [];
+
     const subMenuAbout: DarwinMenuItemConstructorOptions = {
       label: 'Electron',
       submenu: [
@@ -152,7 +154,7 @@ export default class MenuBuilder {
       ],
     };
     const subMenuHelp: MenuItemConstructorOptions = {
-      label: 'Help',
+      label: 'Settings',
       submenu: [
         {
           label: 'Learn More',
@@ -193,6 +195,8 @@ export default class MenuBuilder {
   }
 
   buildDefaultTemplate() {
+    return [];
+
     const templateDefault = [
       {
         label: '&File',
@@ -253,32 +257,12 @@ export default class MenuBuilder {
               ],
       },
       {
-        label: 'Help',
+        label: 'Settings',
         submenu: [
           {
-            label: 'Learn More',
+            label: 'FireBase',
             click() {
               shell.openExternal('https://electronjs.org');
-            },
-          },
-          {
-            label: 'Documentation',
-            click() {
-              shell.openExternal(
-                'https://github.com/electron/electron/tree/main/docs#readme'
-              );
-            },
-          },
-          {
-            label: 'Community Discussions',
-            click() {
-              shell.openExternal('https://www.electronjs.org/community');
-            },
-          },
-          {
-            label: 'Search Issues',
-            click() {
-              shell.openExternal('https://github.com/electron/electron/issues');
             },
           },
         ],

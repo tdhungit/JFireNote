@@ -1,50 +1,34 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
+import { useRef } from 'react';
+import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-}
+import MainMenu from './components/MainMenu/MainMenu';
+import Dashboard from './pages/Home/Dashboard';
+import FirebaseSetting from './pages/Settings/FirebaseSetting';
 
 export default function App() {
+  const toast = useRef<Toast>(null);
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
+      <div style={{ padding: 0, margin: 0 }}>
+        <MainMenu />
+        <div style={{ padding: 0, margin: 0 }}>
+          <Toast ref={toast} />
+          <ConfirmDialog />
+          <Routes>
+            <Route
+              path="/"
+              element={<Dashboard toast={toast?.current || undefined} />}
+            />
+            <Route
+              path="/settings/firebase"
+              element={<FirebaseSetting toast={toast?.current || undefined} />}
+            />
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }
