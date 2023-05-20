@@ -1,5 +1,6 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import ReactLinkify from 'react-linkify';
 
 interface Props {
   setMessage: (message: string) => void;
@@ -27,7 +28,7 @@ function AlertModal({ setMessage, message }: Props) {
         header="Information"
         footer={footerContent}
       >
-        {message}
+        <ReactLinkify>{message}</ReactLinkify>
       </Dialog>
     </div>
   );

@@ -18,6 +18,13 @@ function MainMenu() {
       },
     },
     {
+      label: 'Help',
+      icon: 'pi pi-question',
+      command: () => {
+        nav('/help');
+      },
+    },
+    {
       label: 'Home',
       icon: 'pi pi-home',
       command: () => {

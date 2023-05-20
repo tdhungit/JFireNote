@@ -27,9 +27,23 @@ export async function addGroupNote(db: Firestore, name: string) {
   });
 }
 
-export async function updateGroup(db: Firestore, id: string, name: string) {
+export async function updateGroup(
+  db: Firestore,
+  id: string,
+  name?: string,
+  count?: number
+) {
   const ref = doc(db, DbCollections.category, id);
-  const result: any = await updateDoc(ref, { name });
+  let data: any = {};
+  if (name) {
+    data.name = name;
+  }
+
+  if (count && count > 0) {
+    data.count = count;
+  }
+
+  const result: any = await updateDoc(ref, data);
   return { id: id, ...result };
 }
 
@@ -49,7 +63,16 @@ export function getGroups(db: Firestore, callback: (data: any) => void) {
   });
 }
 
+export async function getGroup(db: Firestore, groupId: string) {
+  const docRef = doc(db, DbCollections.category, groupId);
+  const document = await getDoc(docRef);
+  return { ...document.data(), id: groupId };
+}
+
 export async function addNote(db: Firestore, name: string, groupId: string) {
+  const group: any = await getGroup(db, groupId);
+  const count = group.count || 0;
+  await updateGroup(db, groupId, undefined, count + 1);
   return await addDoc(collection(db, DbCollections.note), {
     createdAt: serverTimestamp(),
     name,

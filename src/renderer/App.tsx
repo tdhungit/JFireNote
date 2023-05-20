@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import MainMenu from './components/MainMenu/MainMenu';
+import Help from './pages/Help/Help';
 import Dashboard from './pages/Home/Dashboard';
 import FirebaseSetting from './pages/Settings/FirebaseSetting';
 
@@ -26,6 +27,7 @@ export default function App() {
               path="/settings/firebase"
               element={<FirebaseSetting toast={toast?.current || undefined} />}
             />
+            <Route path="/help" element={<Help />} />
           </Routes>
         </div>
       </div>
