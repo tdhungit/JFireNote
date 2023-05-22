@@ -1,7 +1,7 @@
 import { Firestore } from 'firebase/firestore';
 import { Editor } from 'primereact/editor';
 import { Message } from 'primereact/message';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { saveNote } from 'renderer/utils/notes';
 
 interface Props {
@@ -19,7 +19,7 @@ function EditNoteForm({ db, note }: Props) {
     setSaving(false);
   };
 
-  useMemo(() => {
+  useEffect(() => {
     saveNoteContent();
   }, [text]);
 
