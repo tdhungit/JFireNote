@@ -55,3 +55,7 @@ body {
 .alert-modal {
   max-width: 600px !important;
 }
+
+.ql-container {
+  font-family: Poppins, sans-serif;
+}
